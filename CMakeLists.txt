@@ -8,6 +8,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(EXTERNAL_INSTALL_LOCATION ${CMAKE_CURRENT_BINARY_DIR}/external)
 
+include(ExternalProject)
+
 function(main)
     ExternalProject_Add(
         googletest
@@ -15,6 +17,7 @@ function(main)
         GIT_REPOSITORY https://github.com/google/googletest.git
         GIT_TAG main
         CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${EXTERNAL_INSTALL_LOCATION}
+        UPDATE_DISCONNECTED TRUE
     )
 
     add_library(thirdparty_gtest INTERFACE)
